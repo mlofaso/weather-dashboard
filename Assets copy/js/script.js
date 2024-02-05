@@ -20,9 +20,7 @@ function getApi() {
     .then(function (response) {
       return response.json();
     })
-    .then(function (data) {
-      console.log(data);
-    });
+    .then(function (data) {});
 }
 
 searchBtn.addEventListener("click", getApi);
