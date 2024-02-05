@@ -6,25 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
 </head>
+
 <header>
     <h1>Weather Dashboard</h1>
 </header>
 
 <body>
-    <h2>Search for a city:</h2>
-    <input type="text">
-    <button id="searchBtn">Search</button>
+    <form>
+        <label for="cityName">Search for a city:</label>
+        <input type="text" name="cityName" id="cityName">
+        <button id="searchBtn">Search</button>
+    </form>
 
-    <div id="stored-cities">
-
+    <div id="storedCities">
     </div>
-    <div id="current-city">
-
+    <div id="currentCity">
     </div>
 </body>
 
 <footer>
-
 </footer>
 
 </html>
