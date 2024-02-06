@@ -10,21 +10,66 @@
 
 var currentCity = document.getElementById("currentCity");
 var searchBtn = document.getElementById("searchBtn");
-var cityName = document.getElementById("cityName");
+var userInput = document.getElementById("cityName");
+var forecast = document.getElementById("forecast");
 
-function getApi() {
+function getApiWeather(x) {
+  // grab the value for the city name and insert it into the apiurl
+  console.log(x);
   var requestUrl =
-    "https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={0e0b7c450f9c8931ca8495ab3a500c20}";
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
+    x +
+    "&appid=0e0b7c450f9c8931ca8495ab3a500c20&units=imperial";
 
   fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
-    .then(function (data) {});
+    .then(function (data) {
+      displayCurrent(data);
+    });
 }
 
-searchBtn.addEventListener("click", getApi);
-console.log("search");
+function getApiForecast(x) {
+  // grab the value for the city name and insert it into the apiurl
+  console.log(x);
+  var requestUrl =
+    "https://api.openweathermap.org/data/2.5/forecast?q=" +
+    x +
+    "&appid=0e0b7c450f9c8931ca8495ab3a500c20&units=imperial";
+
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      // displayCurrent(data);
+    });
+}
+
+function captureData(event) {
+  event.preventDefault();
+  // this function needs to grab the value of the search field
+  // then pass it into Getapi function
+  getApiWeather(userInput.value);
+  getApiForecast(userInput.value);
+}
+
+function displayCurrent(data) {
+  currentCity.innerHTML = "";
+  console.log(data);
+  var currentCityEl = document.createElement("h2");
+  currentCityEl.textContent = data.name;
+  var tempEl = document.createElement("p");
+  tempEl.textContent = "Temp: " + data.main.temp;
+  var windEl = document.createElement("p");
+  windEl.textContent = "Wind: ";
+  var humidityEl = document.createElement("p");
+  humidityEl.textContent = "Humidity: ";
+  currentCity.append(currentCityEl, tempEl, windEl, humidityEl);
+}
+
+searchBtn.addEventListener("click", captureData);
 
 // WHEN I search for a city, that city is added to the search history
 // WHEN I click on a city in the search history
