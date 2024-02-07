@@ -3,7 +3,7 @@
 // WHEN I search for a city
 // THEN I am presented with future conditions for that city
 // WHEN I view current weather conditions for that city
-// THEN I am presented with the date, an icon representation of weather conditions, the humidity, and the wind speed
+// THEN I am presented with the date and an icon representation of weather conditions
 // WHEN I view future weather conditions for that city
 // THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
 
@@ -11,6 +11,7 @@ var currentCity = document.getElementById("currentCity");
 var searchBtn = document.getElementById("searchBtn");
 var userInput = document.getElementById("cityName");
 var forecast = document.getElementById("forecast");
+var dayOne = document.getElementById("dayOne");
 
 function getApiWeather(x) {
   console.log(x);
@@ -40,7 +41,7 @@ function getApiForecast(x) {
       return response.json();
     })
     .then(function (data) {
-      // displayCurrent(data);
+      displayForecast(data);
     });
 }
 
@@ -51,6 +52,7 @@ function captureData(event) {
 }
 
 function displayCurrent(data) {
+  console.log(data);
   currentCity.innerHTML = "";
   var currentCityEl = document.createElement("h2");
   currentCityEl.textContent = data.name;
@@ -64,16 +66,13 @@ function displayCurrent(data) {
 }
 
 function displayForecast(data) {
+  console.log(data);
   forecast.innerHTML = "";
-  var El = document.createElement("h3");
-  forecastEl.textContent = data.;
-  var El = document.createElement("");
-  El.textContent = "" + data. + "";
-  var El = document.createElement("");
-  El.textContent = "" + data. + "";
-  var El = document.createElement("");
-  El.textContent = "Humidity: " + data.main.humidity + "%";
-  forecast.append(El, El, El, El);
+  var forecastTitleEl = document.createElement("h3");
+  forecastTitleEl.textContent = "5 Day Forecast:";
+  var dayOneEl = document.createElement("section");
+  dayOneEl.textContent = data.list[4].dt_txt[0];
+  forecast.append(forecastTitleEl);
 }
 
 searchBtn.addEventListener("click", captureData);
