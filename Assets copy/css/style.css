@@ -15,3 +15,8 @@ header h1 {
 #search {
   display: flex;
 }
+
+#currentCity {
+  display: flex;
+  flex-direction: column;
+}
